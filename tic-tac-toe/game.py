@@ -1,4 +1,4 @@
-from player import HumanPlayer,RandomComputerPlayer
+from player import HumanPlayer,RandomComputerPlayer,GeniusComputerPlayer
 import time
 
 class TicTacToe:
@@ -39,7 +39,7 @@ class TicTacToe:
         if all([spot==letter for spot in row]):
             return True
     
-        col_ind = square//3
+        col_ind = square%3
         column = [self.board[col_ind+i*3] for i in range(3)]
         if all([spot==letter for spot in column]):
             return True
@@ -75,8 +75,8 @@ def play(game,x_player,o_player,print_game=True):
                 return letter
 
             letter = 'O' if letter=='X' else 'X'
-        
-        time.sleep(1)
+        if print_game:
+            time.sleep(1)
     
     if print_game:
         print("It\'s a tie!")
@@ -84,6 +84,6 @@ def play(game,x_player,o_player,print_game=True):
 
 if __name__=='__main__':
     x_player = HumanPlayer('X')
-    o_player = RandomComputerPlayer('O')
+    o_player = GeniusComputerPlayer('O')
     t = TicTacToe()
     play(t,x_player,o_player,print_game=True)
